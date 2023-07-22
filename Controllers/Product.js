@@ -10,14 +10,14 @@ var cartProd=[]
 app.use(express.json())
 
 const newProduct=async(req,res)=>{
-    const {prodId,prodName, brand, model, price, category, specs,image,seller,sellerEmail}=req.body;
-    if(!prodId || !prodName || !brand || !model|| !price || !category|| !specs || !image || !seller || !sellerEmail)
+    try{
+    const {prodId,prodName, brand, model, price, category,seller,sellerEmail}=req.body;
+    if(!prodId || !prodName || !brand || !model|| !price || !category || !seller || !sellerEmail)
     return res.status(400).json({error:"Please fill the necessary details "})
-    const sellerData=await User.findOne({email:sellerEmail})
+    const sellerData=await User.find({email:sellerEmail})
     if(!sellerData)
     return res.status(400).json({error:'Invalid credentials'})
-    const prod=new Product(req.body) 
-    try {
+    const prod = new Product(req.body);
         await prod.save()
         res.json({message:'Success'}).status(200)
     } catch (error) {

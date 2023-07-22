@@ -17,7 +17,7 @@ const {
     profilePic
 }=require('../Controllers/User');
 router.post('/newUser',newUser)
-router.post('/userLogin',userLogin)
+router.get('/userLogin',userLogin)
 router.get('/users',[authentication.verifyToken,authentication.admin],users)
 router.get('/customers',[authentication.verifyToken,authentication.admin],customers)
 router.get('/sellers',[authentication.verifyToken,authentication.admin],sellers)

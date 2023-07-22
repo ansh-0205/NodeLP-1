@@ -1,5 +1,6 @@
 const Product=require('../Models/Product')
 const User=require('../Models/User')
+const Cart=require('../Models/Cart');
 
 const addCart=async(req,res)=>{
     const prodName=req.body   
@@ -28,7 +29,7 @@ const addCart=async(req,res)=>{
 }
 const delCart=async(req,res)=>{
     const prodName=req.body
-    const prod=await Product.findOne(prodName)
+    const prod=await Product.findOne({prodName:req.body.prodName})
     const user=userData
         if((req.params.id)>(userData.cart.quantity)){
             res.status(400).json({message:'Not enough in the cart'})

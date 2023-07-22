@@ -15,7 +15,7 @@ const {
     productImage,
     productCmp
 }=require('../Controllers/Product')
-router.post('/newProduct',[authentication.verifyToken,authentication.seller],newProduct)
+router.post('/newProduct',[authentication.verifyToken],newProduct)
 router.get('/products',[authentication.verifyToken],products)
 router.get('/seller/:seller',seller)
 router.get('/:id',prodname)
@@ -25,13 +25,5 @@ router.patch('/:id',[authentication.verifyToken,authentication.modifyProduct],up
 router.delete('/:id',[authentication.verifyToken,authentication.modifyProduct],deleteProd)
 router.post('/images/:id',upload.array('product'),[authentication.verifyToken],productImage)
 router.post('/compare',[authentication.verifyToken],productCmp)
-const {
-    addCart,
-    delCart
-}=require('../Controllers/Cart')
-router.post('/addCart',[authentication.verifyToken],addCart)
-router.post('/delCart',[authentication.verifyToken],delCart)
-const order=require('../Controllers/Order')
-router.post('/order',[authentication.verifyToken],order)
 
 module.exports=router

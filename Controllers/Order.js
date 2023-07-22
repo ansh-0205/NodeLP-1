@@ -6,7 +6,8 @@ const order=async(req,res)=>{
     const {prodName,quantity}=req.body
     try{
         const user=userData
-        const prod=await Product.findOne({prodName:prodName})
+        const prod=await Product.findOne({prodName:req.body.prodName})
+        console.log(prod)
         const o=new Order({
             username:userData.username,
             email:userData.email,
@@ -15,6 +16,7 @@ const order=async(req,res)=>{
             cost:prod.price*parseInt(quantity),
             quantity:quantity
         })
+        await o.save()
         var transporter=nodemailer.createTransport({
             service:'gmail',
             auth:{
@@ -43,4 +45,4 @@ const order=async(req,res)=>{
         res.status(400).json({error:'Error'})
     }
 }
-module.exports=order
+module.exports={order}

@@ -27,12 +27,10 @@ const prodSchema=new mongoose.Schema({
         required:true
     },
     specs:{
-        type:String,
-        required:true
+        type:String
     },
     image:{
-        type:Buffer,
-        required:true
+        type:Buffer
     },
     seller:{
         type:String,
@@ -41,7 +39,6 @@ const prodSchema=new mongoose.Schema({
     sellerEmail:{
         type:String,
         required:true,
-        unique:[true,'email-id exists'],
         lowercase:true,
         validate(value){
             if(!validator.isEmail(value)){
